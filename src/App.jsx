@@ -39,7 +39,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-500 via-purple-500 to-purple-400 flex items-center text-center justify-center p-4">
-      <div className="w-full max-w-md bg-zinc-200/70 rounded-xl shadow-lg p-6">
+      <div className="w-full max-w-md bg-white/80 rounded-xl shadow-lg p-6">
         {/* Tampilan input */}
         {!currentSoal && !error && (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -75,8 +75,8 @@ export default function App() {
         {/* Tampilan soal */}
         {currentSoal && (
           <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-semibold">Question #{currentSoal.nomor}</h3>
-            <p>{currentSoal.soal}</p>
+            <h3>Question #{currentSoal.nomor}</h3>
+            <p className="text-lg font-semibold">{currentSoal.soal}</p>
 
             {!showJawaban ? (
               <button
