@@ -38,7 +38,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-indigo-500 via-purple-500 to-purple-400 flex items-center text-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-b from-indigo-500 via-purple-500 to-purple-400 flex items-center text-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-2xl p-6">
         {/* Tampilan input */}
         {!currentSoal && !error && (

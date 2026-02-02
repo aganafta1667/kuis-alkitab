@@ -18,7 +18,7 @@ export default function CekPass({ onSuccess }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-indigo-500 via-purple-500 to-purple-400 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-indigo-500 via-purple-500 to-purple-400 p-4">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8"
