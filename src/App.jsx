@@ -1,16 +1,106 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { soalData } from "./data";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [nomor, setNomor] = useState("");
+  const [currentSoal, setCurrentSoal] = useState(null);
+  const [showJawaban, setShowJawaban] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const num = parseInt(nomor);
+
+    if (num < 1 || num > 700 || isNaN(num)) {
+      setError("Question is not available");
+      setCurrentSoal(null);
+      setShowJawaban(false);
+      return;
+    }
+
+    const soal = soalData.find((s) => s.nomor === num);
+    if (!soal) {
+      setError("Question is not available");
+      setCurrentSoal(null);
+      setShowJawaban(false);
+    } else {
+      setCurrentSoal(soal);
+      setError("");
+      setShowJawaban(false);
+    }
+  };
+
+  const handleBack = () => {
+    setCurrentSoal(null);
+    setNomor("");
+    setShowJawaban(false);
+    setError("");
+  };
 
   return (
-    <>
-      <div>hello</div>
-    </>
-  )
-}
+    <div className="min-h-screen bg-gradient-to-b from-indigo-500 via-purple-500 to-purple-400 flex items-center text-center justify-center p-4">
+      <div className="w-full max-w-md bg-zinc-200/70 rounded-xl shadow-lg p-6">
+        {/* Tampilan input */}
+        {!currentSoal && !error && (
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <label className="font-semibold">Enter question number:</label>
+            <input
+              type="number"
+              value={nomor}
+              onChange={(e) => setNomor(e.target.value)}
+              className="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-600 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+            <button
+              type="submit"
+              className="bg-violet-600 font-semibold text-white py-2 rounded hover:bg-violet-700 transition "
+            >
+              Submit
+            </button>
+          </form>
+        )}
 
-export default App
+        {/* Pop-up error */}
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 p-4 rounded flex flex-col gap-4">
+            <p>{error}</p>
+            <button
+              onClick={handleBack}
+              className="bg-green-600 text-white py-2 rounded hover:bg-green-800 transition"
+            >
+              Back to Home
+            </button>
+          </div>
+        )}
+
+        {/* Tampilan soal */}
+        {currentSoal && (
+          <div className="flex flex-col gap-4">
+            <h3 className="text-lg font-semibold">Question #{currentSoal.nomor}</h3>
+            <p>{currentSoal.soal}</p>
+
+            {!showJawaban ? (
+              <button
+                onClick={() => setShowJawaban(true)}
+                className="bg-green-700 text-white py-2 rounded hover:bg-green-600/80 transition"
+              >
+                Show Answer
+              </button>
+            ) : (
+              <div className="bg-gray-100 p-3 rounded">
+                <p className="font-semibold">Answer:</p>
+                <p>{currentSoal.jawaban}</p>
+              </div>
+            )}
+
+            <button
+              onClick={handleBack}
+              className="bg-gray-600 text-white py-2 rounded hover:bg-gray-600/80 transition"
+            >
+              Back to Home
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
