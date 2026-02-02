@@ -11,7 +11,7 @@ export default function App() {
     e.preventDefault();
     const num = parseInt(nomor);
 
-    if (num < 1 || num > 700 || isNaN(num)) {
+    if (num < 1 || num > 748 || isNaN(num)) {
       setError("Question is not available");
       setCurrentSoal(null);
       setShowJawaban(false);
