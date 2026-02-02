@@ -43,7 +43,7 @@ export default function App() {
         {/* Tampilan input */}
         {!currentSoal && !error && (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <label className="font-semibold">Enter question number:</label>
+            <label className="font-semibold">Enter Question Number:</label>
             <input
               type="number"
               value={nomor}
